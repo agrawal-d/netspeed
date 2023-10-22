@@ -6,7 +6,7 @@ Live GUI network speed monitor for Linux, written in Rust.
 
 # Usage
 
-Download and run the executable for linux from the [Releases](./releases) tab.
+Download and run the executable for linux from the Releases tab.
 
 # Build from source
 

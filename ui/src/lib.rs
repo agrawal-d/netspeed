@@ -130,7 +130,6 @@ impl MyApp {
         ui.end_row();
 
         ///////////////////////////////////////////////////
-        info!("{}", (stats.rx_bytes - stats.prev_rx_bytes) / 1000);
         ui.label("Download speed");
         ui.label(get_rate(stats.rx_bytes - stats.prev_rx_bytes, duration).to_string());
         ui.end_row();
