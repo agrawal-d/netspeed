@@ -1,4 +1,4 @@
-# Rust starter repository
+# Netspeed
 
 I use this repository as a starter for my Rust projects.
 
