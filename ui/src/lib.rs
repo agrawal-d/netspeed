@@ -59,7 +59,7 @@ impl Default for Stats {
     }
 }
 
-fn update_stats(interfaces: &Vec<String>, stats: &mut Arc<Mutex<Stats>>) {
+fn update_stats(interfaces: &[String], stats: &mut Arc<Mutex<Stats>>) {
     let mut stats = stats.lock().unwrap();
     let interface = &interfaces[stats.selected];
 
@@ -130,44 +130,38 @@ impl MyApp {
         ///////////////////////////////////////////////////
         info!("{}", (stats.rx_bytes - stats.prev_rx_bytes) / 1000);
         ui.label("Download speed");
-        ui.label(format!(
-            "{}",
-            get_rate(stats.rx_bytes - stats.prev_rx_bytes, duration)
-        ));
+        ui.label(get_rate(stats.rx_bytes - stats.prev_rx_bytes, duration).to_string());
         ui.end_row();
 
         ///////////////////////////////////////////////////
 
         ui.label("Upload Speed");
-        ui.label(format!(
-            "{}",
-            get_rate(stats.tx_bytes - stats.prev_tx_bytes, duration)
-        ));
+        ui.label(get_rate(stats.tx_bytes - stats.prev_tx_bytes, duration).to_string());
         ui.end_row();
 
         ///////////////////////////////////////////////////
 
         ui.label("Total Downloaded");
-        ui.label(format!("{}", bytes_to_human_readable(stats.rx_bytes)));
+        ui.label(bytes_to_human_readable(stats.rx_bytes).to_string());
         ui.end_row();
 
         ///////////////////////////////////////////////////
 
         ui.label("Total Uploaded");
-        ui.label(format!("{}", bytes_to_human_readable(stats.tx_bytes)));
+        ui.label(bytes_to_human_readable(stats.tx_bytes).to_string());
         ui.end_row();
 
         ///////////////////////////////////////////////////
 
         ui.label("Max speed");
-        ui.label(format!(
-            "{}",
-            if stats.speed == 0 {
+        ui.label(
+            (if stats.speed == 0 {
                 String::from("Unknown")
             } else {
                 get_rate(stats.speed, Duration::from_secs(1))
-            }
-        ));
+            })
+            .to_string(),
+        );
         ui.end_row();
 
         ///////////////////////////////////////////////////
@@ -183,7 +177,7 @@ impl MyApp {
 
 /// Convert bytes to human readable format with value less than 100 ( upto Tb )
 fn bytes_to_human_readable(bytes: u64) -> String {
-    let units = vec!["b", "Kb", "Mb", "Gb"];
+    let units = ["b", "Kb", "Mb", "Gb"];
     let mut bytes = bytes as f64;
     let mut unit = 0;
 
@@ -254,7 +248,7 @@ impl eframe::App for MyApp {
 pub fn ui() -> Result<(), eframe::Error> {
     let update_interval = Duration::from_millis(UPDATE_UNTERVAL_MS);
 
-    let app = Box::new(MyApp::default());
+    let app = Box::<MyApp>::default();
     let stats = app.stats.clone();
     let interfaces = app.interfaces.clone();
 

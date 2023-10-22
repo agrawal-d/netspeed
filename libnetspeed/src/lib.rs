@@ -39,7 +39,7 @@ pub fn get_interface_type(interface: &str) -> InterfaceType {
 }
 
 /// wireless first, then ethernet, then rest
-pub fn sort_interface_list(interfaces: &mut Vec<String>) {
+pub fn sort_interface_list(interfaces: &mut [String]) {
     interfaces.sort_by(|a, b| {
         let a_type = get_interface_type(a);
         let b_type = get_interface_type(b);
