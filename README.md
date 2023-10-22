@@ -1,6 +1,31 @@
 # Netspeed
 
-I use this repository as a starter for my Rust projects.
+Live GUI network speed monitor for Linux, written in Rust.
+
+![Screenshot of the application](./screenshot.png)
+
+# Usage
+
+Download and run the executable for linux from the [Releases](./releases) tab.
+
+# Build from source
+
+First, install [Rust toolchain](https://rustup.rs/) and dependencies
+
+```sh
+# Debian
+sudo apt-get install -y libclang-dev libgtk-3-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev libxkbcommon-dev libssl-dev
+
+# Fedora
+dnf install clang clang-devel clang-tools-extra libxkbcommon-devel pkg-config openssl-devel libxcb-devel gtk3-devel atk fontconfig-devel
+```
+
+and then follow the usual Rust steps.
+
+```
+cd <path to project>
+cargo run
+```
 
 # Licence
 

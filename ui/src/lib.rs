@@ -15,6 +15,8 @@ use std::{
 // default string for unknown address
 const UNKNOWN_ADDRESS: &str = "Unknown";
 const UPDATE_UNTERVAL_MS: u64 = 1000;
+const WINDOW_WIDTH: f32 = 320.0;
+const WINDOW_HEIGHT: f32 = 320.0;
 static SPEED_ERROR: Once = Once::new();
 
 struct MyApp {
@@ -175,7 +177,7 @@ impl MyApp {
     }
 }
 
-/// Convert bytes to human readable format with value less than 100 ( upto Tb )
+/// Convert bytes to human readable format with value less than 100 ( upto Gb )
 fn bytes_to_human_readable(bytes: u64) -> String {
     let units = ["b", "Kb", "Mb", "Gb"];
     let mut bytes = bytes as f64;
@@ -258,10 +260,9 @@ pub fn ui() -> Result<(), eframe::Error> {
     });
 
     let options = eframe::NativeOptions {
-        initial_window_size: Some(egui::vec2(320.0, 400.0)),
-        centered: true,
+        initial_window_size: Some(egui::vec2(WINDOW_WIDTH, WINDOW_HEIGHT)),
         ..Default::default()
     };
 
-    eframe::run_native("NetSpeed", options, Box::new(|_| app))
+    eframe::run_native("Network Speed Monitor", options, Box::new(|_| app))
 }
