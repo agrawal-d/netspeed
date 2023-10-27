@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Netspeed 
+Type=Application
+Exec=/usr/bin/netspeed
+Terminal=false
+Icon=/opt/netspeed/icon.png
+Comment=Monitor your network speeds and other stats
+NoDisplay=false
+Categories=Utility

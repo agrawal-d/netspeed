@@ -32,6 +32,7 @@ fn init_logging() -> Result<()> {
 }
 
 fn main() -> Result<(), eframe::Error> {
+    ui::cli::parse_args();
     init_logging()
         .context("Failed to initialize logging")
         .unwrap();

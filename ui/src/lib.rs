@@ -3,8 +3,10 @@ extern crate libnetspeed;
 extern crate log;
 extern crate simplelog;
 
+pub mod cli;
+
 use anyhow::Result;
-use eframe::egui;
+use eframe::{egui, IconData};
 use libnetspeed::*;
 use log::*;
 use std::{
@@ -262,6 +264,9 @@ pub fn ui() -> Result<(), eframe::Error> {
 
     let options = eframe::NativeOptions {
         initial_window_size: Some(egui::vec2(WINDOW_WIDTH, WINDOW_HEIGHT)),
+        icon_data: Some(
+            IconData::try_from_png_bytes(&include_bytes!("../../icon.png")[..]).unwrap(),
+        ),
         resizable: false,
         ..Default::default()
     };

@@ -6,7 +6,7 @@ Live GUI network speed monitor for Linux, written in Rust.
 
 # Usage
 
-Download and run the executable for linux from the Releases tab.
+Download and install the debian package / run the executable for linux from the Releases tab.
 
 # Build from source
 
