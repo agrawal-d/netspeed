@@ -26,10 +26,12 @@ struct MyApp {
 
 impl Default for MyApp {
     fn default() -> Self {
-        MyApp {
+        let mut res = MyApp {
             interfaces: list_network_interfaces().unwrap_or_default(),
             stats: Arc::new(Mutex::new(Stats::default())),
-        }
+        };
+        sort_interface_list(&mut res.interfaces);
+        res
     }
 }
 
@@ -260,6 +262,7 @@ pub fn ui() -> Result<(), eframe::Error> {
 
     let options = eframe::NativeOptions {
         initial_window_size: Some(egui::vec2(WINDOW_WIDTH, WINDOW_HEIGHT)),
+        resizable: false,
         ..Default::default()
     };
 

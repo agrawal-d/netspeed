@@ -38,7 +38,7 @@ pub fn get_interface_type(interface: &str) -> InterfaceType {
     }
 }
 
-/// wireless first, then ethernet, then rest
+/// all wireless first, then all ethernet, then rest
 pub fn sort_interface_list(interfaces: &mut [String]) {
     interfaces.sort_by(|a, b| {
         let a_type = get_interface_type(a);
@@ -46,16 +46,16 @@ pub fn sort_interface_list(interfaces: &mut [String]) {
 
         if a_type == b_type {
             a.cmp(b)
+        } else if a_type == InterfaceType::Wireless {
+            std::cmp::Ordering::Less
+        } else if b_type == InterfaceType::Wireless {
+            std::cmp::Ordering::Greater
+        } else if a_type == InterfaceType::Ethernet {
+            std::cmp::Ordering::Less
+        } else if b_type == InterfaceType::Ethernet {
+            std::cmp::Ordering::Greater
         } else {
-            match (a_type, b_type) {
-                (InterfaceType::Wireless, _) => std::cmp::Ordering::Less,
-                (_, InterfaceType::Wireless) => std::cmp::Ordering::Greater,
-                (InterfaceType::Ethernet, _) => std::cmp::Ordering::Less,
-                (_, InterfaceType::Ethernet) => std::cmp::Ordering::Greater,
-                (InterfaceType::Loopback, _) => std::cmp::Ordering::Less,
-                (_, InterfaceType::Loopback) => std::cmp::Ordering::Greater,
-                (InterfaceType::Unknown, _) => std::cmp::Ordering::Less,
-            }
+            std::cmp::Ordering::Equal
         }
     });
 }
